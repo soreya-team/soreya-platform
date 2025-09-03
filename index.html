@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soreya - Your Inner Circle</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f3efdf;
+            color: #212121;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .brand-mark {
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+        
+        .circle {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .circle:nth-child(1) { background: #f10c45; top: 0; left: 0; }
+        .circle:nth-child(2) { background: #562633; top: 0; right: 0; }
+        .circle:nth-child(3) { background: #f10c45; bottom: 0; left: 0; }
+        .circle:nth-child(4) { background: #562633; bottom: 0; right: 0; }
+        
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav a {
+            text-decoration: none;
+            color: #212121;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav a:hover, .nav a.active {
+            color: #f10c45;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f10c45, #562633);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .role-toggle {
+            background: #562633;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .role-toggle:hover {
+            background: #f10c45;
+        }
+        
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            min-height: calc(100vh - 80px);
+        }
+        
+        .sidebar {
+            width: 280px;
+            background: white;
+            padding: 2rem;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .content {
+            flex: 1;
+            padding: 2rem;
+            max-width: calc(100% - 280px);
+        }
+        
+        /* Sidebar */
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #562633;
+        }
+        
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #212121;
+        }
+        
+        .sidebar-item:hover, .sidebar-item.active {
+            background: #f10c45;
+            color: white;
+        }
+        
+        .sidebar-item .icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            background: currentColor;
+            opacity: 0.7;
+        }
+        
+        .notification-badge {
+            background: #f10c45;
+            color: white;
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+        
+        /* Content Area */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .page-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #212121;
+        }
+        
+        .cta-button {
+            background: #f10c45;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            background: #562633;
+            transform: translateY(-2px);
+        }
+        
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        
+        .mentor-card {
+            border-left: 4px solid #f10c45;
+        }
+        
+        .mentor-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .mentor-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f10c45, #562633);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .mentor-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .mentor-title {
+            color: #562633;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .expertise-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .tag {
+            background: #f3efdf;
+            color: #562633;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            border: 1px solid #562633;
+        }
+        
+        .match-score {
+            background: #f10c45;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 1rem 0;
+        }
+        
+        .card-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        
+        .btn-primary {
+            background: #f10c45;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            flex: 1;
+        }
+        
+        .btn-primary:hover {
+            background: #562633;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #562633;
+            padding: 0.6rem 1.2rem;
+            border: 2px solid #562633;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background: #562633;
+            color: white;
+        }
+        
+        /* Event Cards */
+        .event-card {
+            border-left: 4px solid #562633;
+        }
+        
+        .event-date {
+            background: #562633;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 8px;
+            text-align: center;
+            width: 80px;
+            font-weight: bold;
+        }
+        
+        .event-header {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .event-info {
+            flex: 1;
+        }
+        
+        .event-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        
+        .event-details {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .attendees {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .attendee-avatars {
+            display: flex;
+            margin-right: 0.5rem;
+        }
+        
+        .attendee-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #562633, #212121);
+            margin-left: -5px;
+            border: 2px solid white;
+        }
+        
+        /* Dashboard Stats */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #f10c45;
+            display: block;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .quick-actions h3 {
+            margin-bottom: 1rem;
+            color: #562633;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            background: #f3efdf;
+            color: #212121;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid #562633;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .action-btn:hover {
+            background: #f10c45;
+            color: white;
+            border-color: #f10c45;
+        }
+        
+        /* Mentor View Specific */
+        .mentee-request {
+            border-left: 4px solid #562633;
+            background: #f9f9f9;
+        }
+        
+        .request-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .urgency-badge {
+            background: #f10c45;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-left: auto;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                padding: 1rem;
+            }
+            
+            .content {
+                max-width: 100%;
+                padding: 1rem;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav {
+                display: none;
+            }
+        }
+        
+        .view-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #f10c45;
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(241, 12, 69, 0.3);
+            font-weight: bold;
+            z-index: 1000;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="brand-mark">
+                <svg viewBox="0 0 100 100" fill="white">
+                    <circle cx="25" cy="25" r="20" stroke="white" stroke-width="6" fill="none"/>
+                    <circle cx="75" cy="25" r="20" stroke="white" stroke-width="6" fill="none"/>
+                    <circle cx="25" cy="75" r="20" stroke="white" stroke-width="6" fill="none"/>
+                    <circle cx="75" cy="75" r="20" stroke="white" stroke-width="6" fill="none"/>
+                </svg>
+            </div>
+            <span>Soreya</span>
+        </div>
+        
+        <nav class="nav">
+            <a href="#" class="active">Dashboard</a>
+            <a href="#">Mentors</a>
+            <a href="#">Events</a>
+            <a href="#">Community</a>
+            <a href="#">Resources</a>
+        </nav>
+        
+        <div class="user-actions">
+            <button class="role-toggle" onclick="toggleView()">
+                <span id="current-role">Mentee View</span>
+            </button>
+            <div class="user-avatar">SC</div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Your Journey</h3>
+                <div class="sidebar-item active">
+                    <div class="icon"></div>
+                    <span>Dashboard</span>
+                </div>
+                <div class="sidebar-item">
+                    <div class="icon"></div>
+                    <span>My Mentors</span>
+                    <div class="notification-badge">2</div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="icon"></div>
+                    <span>Messages</span>
+                    <div class="notification-badge">5</div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="icon"></div>
+                    <span>Goals & Progress</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Community</h3>
+                <div class="sidebar-item">
+                    <div class="icon"></div>
+                    <span>Upcoming Events</span>
+                    <div class="notification-badge">3</div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="icon"></div>
+                    <span>Discussion Groups</span>
+                </div>
+                <div class="sidebar-item">
+                    <div class="icon"></div>
+                    <span>Success Stories</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Resources</h3>
+                <div class="sidebar-item">
+                    <div class="icon"></div>
+                    <span>Toolkit</span>
+                </div>
+                <div class="sidebar-item">
+                    <div class="icon"></div>
+                    <span>Templates</span>
+                </div>
+                <div class="sidebar-item">
+                    <div class="icon"></div>
+                    <span>Learning Path</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Mentee View -->
+            <div id="mentee-view">
+                <div class="page-header">
+                    <h1 class="page-title">Welcome back, Sarah! 👋</h1>
+                    <button class="cta-button">Find New Mentor</button>
+                </div>
+
+                <!-- Stats Row -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <span class="stat-number">3</span>
+                        <div class="stat-label">Active Mentors</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">12</span>
+                        <div class="stat-label">Sessions Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">8</span>
+                        <div class="stat-label">Goals Achieved</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">95%</span>
+                        <div class="stat-label">Community Rating</div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="action-buttons">
+                        <button class="action-btn">Book Mentoring Session</button>
+                        <button class="action-btn">Join Discussion</button>
+                        <button class="action-btn">Update Goals</button>
+                        <button class="action-btn">Share Success</button>
+                    </div>
+                </div>
+
+                <!-- Recommended Mentors -->
+                <h2 style="margin-bottom: 1rem; color: #562633;">Recommended Mentors</h2>
+                <div class="cards-grid">
+                    <div class="card mentor-card">
+                        <div class="mentor-header">
+                            <div class="mentor-avatar">MJ</div>
+                            <div class="mentor-info">
+                                <h3>Maria Johnson</h3>
+                                <div class="mentor-title">Serial Entrepreneur & Tech Founder</div>
+                            </div>
+                        </div>
+                        <p>3x successful exits in fintech. Passionate about helping women break into traditionally male-dominated industries.</p>
+                        <div class="expertise-tags">
+                            <span class="tag">Fintech</span>
+                            <span class="tag">Fundraising</span>
+                            <span class="tag">Scale-up</span>
+                        </div>
+                        <div class="match-score">92% Match</div>
+                        <div class="card-actions">
+                            <button class="btn-primary">Connect</button>
+                            <button class="btn-secondary">View Profile</button>
+                        </div>
+                    </div>
+
+                    <div class="card mentor-card">
+                        <div class="mentor-header">
+                            <div class="mentor-avatar">AL</div>
+                            <div class="mentor-info">
+                                <h3>Anna Liu</h3>
+                                <div class="mentor-title">E-commerce & Digital Marketing Expert</div>
+                            </div>
+                        </div>
+                        <p>Built her online fashion brand from $0 to $2M revenue. Specializes in sustainable business practices and customer experience.</p>
+                        <div class="expertise-tags">
+                            <span class="tag">E-commerce</span>
+                            <span class="tag">Digital Marketing</span>
+                            <span class="tag">Sustainability</span>
+                        </div>
+                        <div class="match-score">87% Match</div>
+                        <div class="card-actions">
+                            <button class="btn-primary">Connect</button>
+                            <button class="btn-secondary">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Events -->
+                <h2 style="margin: 2rem 0 1rem; color: #562633;">Upcoming Community Events</h2>
+                <div class="cards-grid">
+                    <div class="card event-card">
+                        <div class="event-header">
+                            <div class="event-date">
+                                <div style="font-size: 1.2rem;">15</div>
+                                <div style="font-size: 0.8rem;">NOV</div>
+                            </div>
+                            <div class="event-info">
+                                <div class="event-title">Pitch Perfect Workshop</div>
+                                <div class="event-details">6:00 PM - 8:00 PM • Virtual</div>
+                            </div>
+                        </div>
+                        <p>Master your elevator pitch with industry experts. Practice in small groups and get personalized feedback.</p>
+                        <div class="attendees">
+                            <div class="attendee-avatars">
+                                <div class="attendee-avatar"></div>
+                                <div class="attendee-avatar"></div>
+                                <div class="attendee-avatar"></div>
+                            </div>
+                            <span>24 attending</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-primary">Join Event</button>
+                            <button class="btn-secondary">Learn More</button>
+                        </div>
+                    </div>
+
+                    <div class="card event-card">
+                        <div class="event-header">
+                            <div class="event-date">
+                                <div style="font-size: 1.2rem;">22</div>
+                                <div style="font-size: 0.8rem;">NOV</div>
+                            </div>
+                            <div class="event-info">
+                                <div class="event-title">Founder Coffee Morning</div>
+                                <div class="event-details">9:00 AM - 11:00 AM • Melbourne CBD</div>
+                            </div>
+                        </div>
+                        <p>Casual networking over good coffee. No formal agenda - just real conversations with fellow female founders.</p>
+                        <div class="attendees">
+                            <div class="attendee-avatars">
+                                <div class="attendee-avatar"></div>
+                                <div class="attendee-avatar"></div>
+                                <div class="attendee-avatar"></div>
+                            </div>
+                            <span>12 attending</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-primary">Join Event</button>
+                            <button class="btn-secondary">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mentor View -->
+            <div id="mentor-view" class="hidden">
+                <div class="page-header">
+                    <h1 class="page-title">Your Mentoring Dashboard 🌟</h1>
+                    <button class="cta-button">Update Availability</button>
+                </div>
+
+                <!-- Stats Row -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <span class="stat-number">8</span>
+                        <div class="stat-label">Active Mentees</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">47</span>
+                        <div class="stat-label">Sessions This Month</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">4.9</span>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">156</span>
+                        <div class="stat-label">Total Impact Hours</div>
+                    </div>
+                </div>
+
+                <!-- Pending Requests -->
+                <h2 style="margin-bottom: 1rem; color: #562633;">Connection Requests</h2>
+                <div class="cards-grid">
+                    <div class="card mentee-request">
+                        <div class="request-header">
+                            <div class="mentor-header">
+                                <div class="mentor-avatar">JD</div>
+                                <div class="mentor-info">
+                                    <h3>Jessica Davis</h3>
+                                    <div class="mentor-title">Health & Wellness Startup</div>
+                                </div>
+                            </div>
+                            <div class="urgency-badge">New</div>
+                        </div>
+                        <p><strong>Challenge:</strong> "I'm struggling with product-market fit for my wellness app. I have users but low engagement. Would love guidance on customer research and iteration strategies."</p>
+                        <div class="expertise-tags">
+                            <span class="tag">Product Development</span>
+                            <span class="tag">User Research</span>
+                            <span class="tag">Health Tech</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-primary">Accept</button>
+                            <button class="btn-secondary">Schedule Chat</button>
+                        </div>
+                    </div>
+
+                    <div class="card mentee-request">
+                        <div class="request-header">
+                            <div class="mentor-header">
+                                <div class="mentor-avatar">KM</div>
+                                <div class="mentor-info">
+                                    <h3>Keiko Martinez</h3>
+                                    <div class="mentor-title">Sustainable Fashion Brand</div>
+                                </div>
+                            </div>
+                            <div class="urgency-badge">Urgent</div>
+                        </div>
+                        <p><strong>Challenge:</strong> "Preparing for Series A funding round. Need help with pitch deck, financial projections, and navigating investor conversations. First-time founder feeling overwhelmed!"</p>
+                        <div class="expertise-tags">
+                            <span class="tag">Fundraising</span>
+                            <span class="tag">Financial Planning</span>
+                            <span class="tag">Investor Relations</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-primary">Accept</button>
+                            <button class="btn-secondary">Schedule Chat</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Mentoring Sessions -->
+                <h2 style="margin: 2rem 0 1rem; color: #562633;">This Week's Sessions</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="mentor-header">
+                            <div class="mentor-avatar">SR</div>
+                            <div class="mentor-info">
+                                <h3>Sophie Richardson</h3>
+                                <div class="mentor-title">Next Session: Thu 2:00 PM</div>
+                            </div>
+                        </div>
+                        <p><strong>Focus Area:</strong> Scaling operations and hiring her first employees. Working through leadership transition challenges.</p>
+                        <div class="expertise-tags">
+                            <span class="tag">Scaling</span>
+                            <span class="tag">Team Building</span>
+                            <span class="tag">Leadership</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-primary">Join Session</button>
+                            <button class="btn-secondary">Send Message</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="mentor-header">
+                            <div class="mentor-avatar">LT</div>
+                            <div class="mentor-info">
+                                <h3>Lisa Thompson</h3>
+                                <div class="mentor-title">Next Session: Fri 10:00 AM</div>
+                            </div>
+                        </div>
+                        <p><strong>Focus Area:</strong> Digital marketing strategy for her consulting business. Working on content strategy and client acquisition.</p>
+                        <div class="expertise-tags">
+                            <span class="tag">Digital Marketing</span>
+                            <span class="tag">Content Strategy</span>
+                            <span class="tag">Consulting</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-primary">Join Session</button>
+                            <button class="btn-secondary">Send Message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- View Toggle Button -->
+    <button class="view-toggle" onclick="toggleView()">
+        Switch to <span id="toggle-text">Mentor</span> View
+    </button>
+
+    <script>
+        let currentView = 'mentee';
+        
+        function toggleView() {
+            const menteeView = document.getElementById('mentee-view');
+            const mentorView = document.getElementById('mentor-view');
+            const currentRole = document.getElementById('current-role');
+            const toggleText = document.getElementById('toggle-text');
+            
+            if (currentView === 'mentee') {
+                menteeView.classList.add('hidden');
+                mentorView.classList.remove('hidden');
+                currentRole.textContent = 'Mentor View';
+                toggleText.textContent = 'Mentee';
+                currentView = 'mentor';
+            } else {
+                menteeView.classList.remove('hidden');
+                mentorView.classList.add('hidden');
+                currentRole.textContent = 'Mentee View';
+                toggleText.textContent = 'Mentor';
+                currentView = 'mentee';
+            }
+        }
+        
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate cards on hover
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Add click handlers for buttons
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (!this.onclick) {
+                        e.preventDefault();
+                        // Add a subtle animation for demo
+                        this.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            this.style.transform = 'scale(1)';
+                        }, 100);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
