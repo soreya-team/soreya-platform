@@ -13,14 +13,14 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f3efdf;
+            background: #562633;
             color: #212121;
             line-height: 1.6;
         }
         
         /* Header */
         .header {
-            background: white;
+            background: #f3efdf;
             padding: 1rem 2rem;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             display: flex;
@@ -34,15 +34,12 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-weight: bold;
-            font-size: 1.5rem;
+            gap: 18px;
         }
         
         .brand-mark {
             width: 40px;
             height: 40px;
-            position: relative;
         }
         
         .circle {
@@ -52,9 +49,9 @@
             position: absolute;
         }
         
-        .circle:nth-child(1) { background: #f10c45; top: 0; left: 0; }
+        .circle:nth-child(1) { background: #562633; top: 0; left: 0; }
         .circle:nth-child(2) { background: #562633; top: 0; right: 0; }
-        .circle:nth-child(3) { background: #f10c45; bottom: 0; left: 0; }
+        .circle:nth-child(3) { background: #562633; bottom: 0; left: 0; }
         .circle:nth-child(4) { background: #562633; bottom: 0; right: 0; }
         
         .nav {
@@ -114,7 +111,7 @@
         
         .sidebar {
             width: 280px;
-            background: white;
+            background: #f3efdf;
             padding: 2rem;
             box-shadow: 2px 0 10px rgba(0,0,0,0.1);
         }
@@ -134,7 +131,7 @@
             font-size: 1.1rem;
             font-weight: bold;
             margin-bottom: 1rem;
-            color: #562633;
+            color: #212121;
         }
         
         .sidebar-item {
@@ -182,7 +179,7 @@
         .page-title {
             font-size: 2rem;
             font-weight: bold;
-            color: #212121;
+            color: #f3efdf;
         }
         
         .cta-button {
@@ -210,7 +207,7 @@
         }
         
         .card {
-            background: white;
+            background: #f3efdf;
             border-radius: 12px;
             padding: 1.5rem;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -274,7 +271,7 @@
         }
         
         .match-score {
-            background: #f10c45;
+            background: #562633;
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 20px;
@@ -324,11 +321,11 @@
         
         /* Event Cards */
         .event-card {
-            border-left: 4px solid #562633;
+            border-left: 4px solid #f10c45;
         }
         
         .event-date {
-            background: #562633;
+            background: #f10c45;
             color: white;
             padding: 0.5rem;
             border-radius: 8px;
@@ -389,7 +386,7 @@
         }
         
         .stat-card {
-            background: white;
+            background: #f3efdf;
             padding: 1.5rem;
             border-radius: 12px;
             text-align: center;
@@ -399,7 +396,7 @@
         .stat-number {
             font-size: 2.5rem;
             font-weight: bold;
-            color: #f10c45;
+            color: #562633;
             display: block;
         }
         
@@ -411,7 +408,7 @@
         
         /* Quick Actions */
         .quick-actions {
-            background: white;
+            background: #f3efdf;
             padding: 1.5rem;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -449,7 +446,7 @@
         /* Mentor View Specific */
         .mentee-request {
             border-left: 4px solid #562633;
-            background: #f9f9f9;
+            background: #f3efdf;
         }
         
         .request-header {
@@ -517,15 +514,8 @@
     <!-- Header -->
     <header class="header">
         <div class="logo">
-            <div class="brand-mark">
-                <svg viewBox="0 0 100 100" fill="white">
-                    <circle cx="25" cy="25" r="20" stroke="white" stroke-width="6" fill="none"/>
-                    <circle cx="75" cy="25" r="20" stroke="white" stroke-width="6" fill="none"/>
-                    <circle cx="25" cy="75" r="20" stroke="white" stroke-width="6" fill="none"/>
-                    <circle cx="75" cy="75" r="20" stroke="white" stroke-width="6" fill="none"/>
-                </svg>
-            </div>
-            <span>Soreya</span>
+            <img src="images/Soreya Brand Mark RGB Crimson.png" alt="Platform logo" class="brand-mark" style="height:40px;">
+            <img src="images/Soreya Text Crimson.png" alt="Soreya" class="logo-text" style="height:24px;">
         </div>
         
         <nav class="nav">
@@ -645,7 +635,7 @@
                 </div>
 
                 <!-- Recommended Mentors -->
-                <h2 style="margin-bottom: 1rem; color: #562633;">Recommended Mentors</h2>
+                <h2 style="margin-bottom: 1rem; color: #f3efdf;">Recommended Mentors</h2>
                 <div class="cards-grid">
                     <div class="card mentor-card">
                         <div class="mentor-header">
@@ -691,20 +681,20 @@
                 </div>
 
                 <!-- Upcoming Events -->
-                <h2 style="margin: 2rem 0 1rem; color: #562633;">Upcoming Community Events</h2>
+                <h2 style="margin: 2rem 0 1rem; color: #f3efdf;">Upcoming Community Events</h2>
                 <div class="cards-grid">
                     <div class="card event-card">
                         <div class="event-header">
                             <div class="event-date">
-                                <div style="font-size: 1.2rem;">15</div>
+                                <div style="font-size: 1.2rem;">11</div>
                                 <div style="font-size: 0.8rem;">NOV</div>
                             </div>
                             <div class="event-info">
-                                <div class="event-title">Pitch Perfect Workshop</div>
+                                <div class="event-title">Nail Your Personal Brand</div>
                                 <div class="event-details">6:00 PM - 8:00 PM • Virtual</div>
                             </div>
                         </div>
-                        <p>Master your elevator pitch with industry experts. Practice in small groups and get personalized feedback.</p>
+                        <p>Craft a standout personal brand that highlights your unique strengths with Suz’s expert insights. Boost your business impact and attract your ideal clients with confidence.</p>
                         <div class="attendees">
                             <div class="attendee-avatars">
                                 <div class="attendee-avatar"></div>
@@ -722,15 +712,15 @@
                     <div class="card event-card">
                         <div class="event-header">
                             <div class="event-date">
-                                <div style="font-size: 1.2rem;">22</div>
+                                <div style="font-size: 1.2rem;">25</div>
                                 <div style="font-size: 0.8rem;">NOV</div>
                             </div>
                             <div class="event-info">
-                                <div class="event-title">Founder Coffee Morning</div>
+                                <div class="event-title">Clay & Connection</div>
                                 <div class="event-details">9:00 AM - 11:00 AM • Melbourne CBD</div>
                             </div>
                         </div>
-                        <p>Casual networking over good coffee. No formal agenda - just real conversations with fellow female founders.</p>
+                        <p>Get hands-on, get refreshed. Create pottery, unwind, and nourish genuine connections with fellow business owners in a relaxed, inspiring space.</p>
                         <div class="attendees">
                             <div class="attendee-avatars">
                                 <div class="attendee-avatar"></div>
@@ -811,11 +801,11 @@
                             </div>
                             <div class="urgency-badge">Urgent</div>
                         </div>
-                        <p><strong>Challenge:</strong> "Preparing for Series A funding round. Need help with pitch deck, financial projections, and navigating investor conversations. First-time founder feeling overwhelmed!"</p>
+                        <p><strong>Challenge:</strong> "Last-minute quality control issues with sourced materials—desperately need advice on troubleshooting without delaying our launch."</p>
                         <div class="expertise-tags">
-                            <span class="tag">Fundraising</span>
-                            <span class="tag">Financial Planning</span>
-                            <span class="tag">Investor Relations</span>
+                            <span class="tag">Supply Chain</span>
+                            <span class="tag">Ethical Sourcing</span>
+                            <span class="tag">Product Launch</span>
                         </div>
                         <div class="card-actions">
                             <button class="btn-primary">Accept</button>
